@@ -25,6 +25,7 @@ type ProductRating struct {
 	Rate  float32 `json:"rate"`
 	Count int     `json:"count"`
 }
+
 type ProductResponse struct {
 	Id          int           `json:"id"`
 	Price       float32       `json:"price"`
