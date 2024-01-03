@@ -41,13 +41,13 @@ func LoadCart(cartId int) CartResponse {
 
 	resp, err := http.Get(url)
 	if err != nil {
-		panic(err)
+		panic(err) // @todo log.Fatalf("Error loading Cart URL "%v", error: %v", url, err)
 	}
 	defer resp.Body.Close()
 	var parsedResp CartResponse
 	decodeErr := json.NewDecoder(resp.Body).Decode(&parsedResp)
 	if decodeErr != nil {
-		panic(err)
+		panic(err) // @todo log.Fatalf("Error decoding LoadCart response %v", err)
 	}
 	return parsedResp
 }
@@ -57,13 +57,13 @@ func LoadProduct(id int) ProductResponse {
 
 	resp, err := http.Get(url)
 	if err != nil {
-		panic(err)
+		panic(err) // @todo log.Fatalf("Error loading Product URL "%w", error: %w", url, err)
 	}
 	defer resp.Body.Close()
 	var parsedResp ProductResponse
 	decodeErr := json.NewDecoder(resp.Body).Decode(&parsedResp)
 	if decodeErr != nil {
-		panic(err)
+		panic(err) // @todo log.Fatalf("Error decoding LoadProduct response %w", err)
 	}
 	return parsedResp
 }
