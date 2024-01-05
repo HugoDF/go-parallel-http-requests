@@ -37,6 +37,7 @@ type ProductResponse struct {
 }
 
 func LoadCart(cartId int) CartResponse {
+	start := time.Now()
 	url := fmt.Sprintf("https://fakestoreapi.com/carts/%d", cartId)
 
 	resp, err := http.Get(url)
@@ -49,10 +50,13 @@ func LoadCart(cartId int) CartResponse {
 	if decodeErr != nil {
 		panic(err) // @todo log.Fatalf("Error decoding LoadCart response %v", err)
 	}
+	end := time.Now()
+	slog.Debug("LoadCart", "id", cartId, "time", end.Sub(start))
 	return parsedResp
 }
 
 func LoadProduct(id int) ProductResponse {
+	start := time.Now()
 	url := fmt.Sprintf("https://fakestoreapi.com/products/%d", id)
 
 	resp, err := http.Get(url)
@@ -65,6 +69,8 @@ func LoadProduct(id int) ProductResponse {
 	if decodeErr != nil {
 		panic(err) // @todo log.Fatalf("Error decoding LoadProduct response %w", err)
 	}
+	end := time.Now()
+	slog.Debug("LoadProduct", "id", id, "time", end.Sub(start))
 	return parsedResp
 }
 
